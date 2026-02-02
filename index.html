@@ -17,58 +17,125 @@
   </header>
 
   <main>
-    <section class="card">
-      <div class="card-header">
-        <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-            <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-          </svg> Thông tin cầu thủ</h2>
-        <div class="actions">
-          <button class="btn btn-danger" id="btnClear">Xoá dữ liệu</button>
-          <button class="btn" id="btnExport">Xuất JSON</button>
-          <button class="btn btn-primary" id="btnImport">Nhập JSON</button>
-          <input type="file" id="importFile" accept=".json" style="display: none;">
+    <div class="main-column">
+      <section class="card">
+        <div class="card-header">
+          <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg> Thông tin cầu thủ</h2>
+          <div class="actions">
+            <button class="btn btn-danger" id="btnClear">Xoá dữ liệu</button>
+            <button class="btn" id="btnExport">Xuất JSON</button>
+            <button class="btn btn-primary" id="btnImport">Nhập JSON</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+          </div>
         </div>
-      </div>
 
-      <div class="card-body">
-        <div class="controls-grid">
-          <div class="control-group" style="flex: 2;">
-            <label>Tên cầu thủ</label>
-            <div style="display: flex; gap: 8px;">
-              <input id="playerName" type="text" placeholder="Nhập tên..." />
-              <button class="btn" id="btnSave" style="min-width: 60px;">Lưu</button>
-              <button class="btn" id="btnLoad" style="min-width: 60px;">Tải</button>
+        <div class="card-body">
+          <div class="controls-grid">
+            <div class="control-group" style="flex: 3;">
+              <label>Link cầu thủ (fo4players.com)</label>
+              <div class="input-group">
+                <input id="playerLink" type="text" placeholder="Dán link từ fo4players.com..." />
+                <button class="btn btn-primary" id="btnFill">Nhập Link</button>
+              </div>
+            </div>
+            <div class="control-group" style="flex: 2;">
+              <label>Tên cầu thủ</label>
+              <div class="input-group">
+                <input id="playerName" type="text" placeholder="Nhập tên..." />
+                <button class="btn" id="btnSave">Lưu</button>
+                <button class="btn" id="btnLoad">Tải</button>
+              </div>
+            </div>
+            <div class="control-group" style="flex: 1.2;">
+              <label>Lọc theo vị trí</label>
+              <select id="posFilter">
+                <option value="all">Tất cả chỉ số</option>
+              </select>
             </div>
           </div>
-          <div class="control-group" style="flex: 1;">
-            <label>Lọc theo vị trí</label>
-            <select id="posFilter">
-              <option value="all">Tất cả chỉ số</option>
-            </select>
+
+          <div class="controls-grid"
+            style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--card-border);">
+            <div class="control-group" style="flex: 1;">
+              <label>Cấp độ (Level)</label>
+              <div class="bonus-selector" id="levelSelector">
+                <button class="btn btn-sm active" data-val="1">1</button>
+                <button class="btn btn-sm" data-val="2">2</button>
+                <button class="btn btn-sm" data-val="3">3</button>
+                <button class="btn btn-sm" data-val="4">4</button>
+                <button class="btn btn-sm" data-val="5">5</button>
+              </div>
+            </div>
+            <div class="control-group" style="flex: 2;">
+              <label>Nâng cấp (Grade)</label>
+              <div class="bonus-selector" id="gradeSelector">
+                <button class="btn btn-sm" data-val="0">+0</button>
+                <button class="btn btn-sm active" data-val="1">+1</button>
+                <button class="btn btn-sm" data-val="2">+2</button>
+                <button class="btn btn-sm" data-val="3">+3</button>
+                <button class="btn btn-sm" data-val="4">+4</button>
+                <button class="btn btn-sm" data-val="5">+5</button>
+                <button class="btn btn-sm" data-val="6">+6</button>
+                <button class="btn btn-sm" data-val="7">+7</button>
+                <button class="btn btn-sm" data-val="8">+8</button>
+                <button class="btn btn-sm" data-val="9">+9</button>
+                <button class="btn btn-sm" data-val="10">+10</button>
+                <button class="btn btn-sm" data-val="11">+11</button>
+                <button class="btn btn-sm" data-val="12">+12</button>
+                <button class="btn btn-sm" data-val="13">+13</button>
+              </div>
+            </div>
+            <div class="control-group" style="flex: 1.5;">
+              <label>TeamColor Bonus</label>
+              <div class="bonus-selector" id="teamSelector">
+                <button class="btn btn-sm active" data-val="0">0</button>
+                <button class="btn btn-sm" data-val="1">+1</button>
+                <button class="btn btn-sm" data-val="2">+2</button>
+                <button class="btn btn-sm" data-val="3">+3</button>
+                <button class="btn btn-sm" data-val="4">+4</button>
+                <button class="btn btn-sm" data-val="5">+5</button>
+                <button class="btn btn-sm" data-val="6">+6</button>
+                <button class="btn btn-sm" data-val="7">+7</button>
+                <button class="btn btn-sm" data-val="8">+8</button>
+                <button class="btn btn-sm" data-val="9">+9</button>
+                <button class="btn btn-sm" data-val="10">+10</button>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <h3 style="margin: 0; font-size: 16px;">Bảng chỉ số chi tiết</h3>
+      <section class="card">
+        <div class="card-header">
+          <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20v-6M6 20V10M18 20V4" />
+            </svg> Bảng chỉ số chi tiết</h2>
           <span class="pill">Đã nhập: <span id="filledCount">0</span> / <span id="attrCount">0</span></span>
         </div>
-
-        <div style="max-height: 600px; overflow-y: auto; border-radius: 12px; border: 1px solid var(--card-border);">
-          <table id="attrTable">
-            <thead>
-              <tr>
-                <th>Tên Chỉ Số</th>
-                <th style="text-align: right;">Chỉ số</th>
-                <th style="text-align: right;">Bonus</th>
-                <th style="text-align: right;">Tổng</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-container" style="max-height: 600px; border: none; border-radius: 0;">
+            <table id="attrTable">
+              <thead>
+                <tr>
+                  <th>Tên Chỉ Số</th>
+                  <th style="text-align: right;">Chỉ số</th>
+                  <th style="text-align: right;">Lv</th>
+                  <th style="text-align: right;">Gr</th>
+                  <th style="text-align: right;">TC</th>
+                  <th style="text-align: right;">HLV</th>
+                  <th style="text-align: right;">Tổng</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
 
     <section class="card">
       <div class="card-header">
@@ -76,14 +143,14 @@
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 16v-4"></path>
             <path d="M12 8h.01"></path>
-          </svg> Điểm theo vị trí</h2>
+          </svg> Chỉ số theo vị trí</h2>
       </div>
       <div class="card-body" style="padding: 0;">
         <table id="posTable">
           <thead>
             <tr>
               <th>Vị trí</th>
-              <th style="text-align: right;">Điểm số</th>
+              <th style="text-align: right;">Chỉ số</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -98,20 +165,21 @@
           <div id="breakInfo" class="mini-info">Chọn một vị trí để xem chi tiết</div>
         </div>
       </div>
-      <div class="card-body" style="padding: 0; max-height: 600px; overflow-y: auto;">
-        <table id="breakTable">
-          <thead>
-            <tr>
-              <th>Chỉ số</th>
-              <th style="text-align: right;">Hệ số</th>
-              <th style="text-align: right;">Chỉ số</th>
-              <th style="text-align: right;">Bonus</th>
-              <th style="text-align: right;">Tổng</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <div class="card-body" style="padding: 0;">
+        <div class="table-container" style="max-height: 850px; border: none; border-radius: 0;">
+          <table id="breakTable">
+            <thead>
+              <tr>
+                <th>Chỉ số</th>
+                <th style="text-align: right;">Hệ số</th>
+                <th style="text-align: right;">Chỉ số</th>
+                <th style="text-align: right;">Bonus</th>
+                <th style="text-align: right;">Tổng</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
     </section>
   </main>
 
