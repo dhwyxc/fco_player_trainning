@@ -507,6 +507,10 @@ tr:last-child td {
 }
 
 /* Breakdown Table Specifics */
+#breakTable {
+    min-width: 650px;
+}
+
 #breakTable th,
 #breakTable td {
     padding: 12px 10px;
@@ -520,22 +524,33 @@ tr:last-child td {
 
 #breakTable th:nth-child(2),
 #breakTable td:nth-child(2) {
-    width: 70px;
+    width: 60px;
 }
 
 #breakTable th:nth-child(3),
 #breakTable td:nth-child(3) {
-    width: 80px;
+    width: 60px;
 }
 
 #breakTable th:nth-child(4),
-#breakTable td:nth-child(4) {
-    width: 80px;
+#breakTable td:nth-child(4),
+#breakTable th:nth-child(5),
+#breakTable td:nth-child(5),
+#breakTable th:nth-child(6),
+#breakTable td:nth-child(6),
+#breakTable th:nth-child(7),
+#breakTable td:nth-child(7) {
+    width: 45px;
+}
+
+#breakTable th:nth-child(8),
+#breakTable td:nth-child(8) {
+    width: 60px;
 }
 
 #breakTable th:last-child,
 #breakTable td:last-child {
-    width: 70px;
+    width: 90px;
     padding-right: 16px;
 }
 

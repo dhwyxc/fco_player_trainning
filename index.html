@@ -176,8 +176,12 @@
                 <th>Chỉ số</th>
                 <th style="text-align: right;">Hệ số</th>
                 <th style="text-align: right;">Chỉ số</th>
-                <th style="text-align: right;">Bonus</th>
+                <th style="text-align: right;">Lv</th>
+                <th style="text-align: right;">Gr</th>
+                <th style="text-align: right;">TC</th>
+                <th style="text-align: right;">HLV</th>
                 <th style="text-align: right;">Tổng</th>
+                <th style="text-align: right;">Tổng x HS</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -188,15 +192,6 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('Service Worker registered', reg))
-          .catch(err => console.log('Service Worker registration failed', err));
-      });
-    }
-  </script>
 </body>
 
 </html>

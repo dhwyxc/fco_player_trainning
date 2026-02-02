@@ -220,7 +220,7 @@ function renderBreakdown(pos) {
     const r = computePositionScore(pos);
 
     elBreakTitle.textContent = "Chi tiết vị trí: " + pos;
-    elBreakInfo.textContent = "Tổng hệ số = " + r.sumW + " | CHỉ số = " + r.score.toFixed(2);
+    elBreakInfo.textContent = "Tổng hệ số = " + r.sumW + " | Chỉ số = " + r.score.toFixed(2);
 
     elBreakBody.innerHTML = "";
 
@@ -250,24 +250,46 @@ function renderBreakdown(pos) {
 
         const tdCS = document.createElement("td");
         tdCS.style.textAlign = "right";
-        tdCS.textContent = String(x.usedCS);
+        tdCS.textContent = String(x.usedCS || "0");
+
+        const tdLv = document.createElement("td");
+        tdLv.style.textAlign = "right";
+        tdLv.className = "mini-info";
+        tdLv.textContent = "+" + lvB;
+
+        const tdGr = document.createElement("td");
+        tdGr.style.textAlign = "right";
+        tdGr.className = "mini-info";
+        tdGr.textContent = "+" + grB;
+
+        const tdTC = document.createElement("td");
+        tdTC.style.textAlign = "right";
+        tdTC.className = "mini-info";
+        tdTC.textContent = "+" + tcB;
 
         const tdB = document.createElement("td");
         tdB.style.textAlign = "right";
         tdB.className = "mini-info";
-        // Show combined global + manual bonus for simplicity in breakdown or just match the main table
-        const totalBonus = x.usedB + lvB + grB + tcB;
-        tdB.textContent = (totalBonus >= 0 ? "+" : "") + totalBonus;
+        tdB.textContent = (x.usedB >= 0 ? "+" : "") + (x.usedB || 0);
+
+        const tdTotalV = document.createElement("td");
+        tdTotalV.style.textAlign = "right";
+        tdTotalV.style.fontWeight = "600";
+        tdTotalV.textContent = String(x.totalV);
 
         const tdC = document.createElement("td");
         tdC.style.textAlign = "right";
-        tdC.style.fontWeight = "600";
+        tdC.style.fontWeight = "700";
         tdC.textContent = (x.contrib).toFixed(0);
 
         tr.appendChild(tdA);
         tr.appendChild(tdW);
         tr.appendChild(tdCS);
+        tr.appendChild(tdLv);
+        tr.appendChild(tdGr);
+        tr.appendChild(tdTC);
         tr.appendChild(tdB);
+        tr.appendChild(tdTotalV);
         tr.appendChild(tdC);
         elBreakBody.appendChild(tr);
     }
