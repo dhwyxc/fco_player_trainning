@@ -20,6 +20,15 @@
 
 * {
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: 'Outfit', sans-serif !important;
 }
 
 body {
@@ -269,7 +278,6 @@ select:focus {
 .actions {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
 }
 
 @media (max-width: 600px) {
@@ -281,7 +289,6 @@ select:focus {
     .actions .btn {
         flex: 1;
         min-width: 100px;
-        font-size: 12px;
         padding: 8px 12px;
     }
 }
@@ -290,34 +297,74 @@ select:focus {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 10px 16px;
+    gap: 8px;
+    padding: 10px 18px;
     border-radius: 12px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--card-border);
     background: var(--glass-overlay);
     color: var(--text-main);
+    font-family: inherit;
+    letter-spacing: 0.3px;
 }
 
 .btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn-primary {
-    background: var(--primary);
-    border-color: transparent;
+    background: linear-gradient(135deg, var(--primary), #6366f1);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
 }
 
 .btn-primary:hover {
-    background: var(--primary-hover);
+    background: linear-gradient(135deg, var(--primary-hover), #4f46e5);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
 }
 
 .btn-danger {
-    color: #ef4444;
+    color: #ff4d4d;
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ff6b6b;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn svg {
+    transition: transform 0.2s ease;
+}
+
+.btn:hover svg {
+    transform: scale(1.1);
+}
+
+.btn:active svg {
+    transform: scale(0.9);
 }
 
 table {
