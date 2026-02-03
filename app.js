@@ -12,7 +12,7 @@ const globalValues = {
 let currentSelectedPos = "ST";
 
 const GRADE_BONUS = {
-    0: 0, 1: 3, 2: 4, 3: 5, 4: 7, 5: 8, 6: 10, 7: 13, 8: 18, 9: 20, 10: 22, 11: 24, 12: 27, 13: 30
+    0: 0, 1: 3, 2: 4, 3: 5, 4: 7, 5: 9, 6: 11, 7: 14, 8: 18, 9: 20, 10: 22, 11: 24, 12: 27, 13: 30
 };
 
 function getLevelBonus() {
