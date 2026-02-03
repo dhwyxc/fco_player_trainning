@@ -1,0 +1,97 @@
+/* Saved Page Specific Styles - Table Layout */
+
+/* Reusing existing table styles from style.css where possible, 
+   but adding specific overrides for the saved players page */
+
+.saved-table-container {
+    width: 100%;
+    margin-top: 20px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#savedTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#savedTable th {
+    background: var(--glass-overlay);
+    padding: 16px 24px;
+    font-weight: 600;
+    text-align: left;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--card-border);
+    white-space: nowrap;
+}
+
+#savedTable td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+#savedTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#savedTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+#savedTable tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.player-name-cell {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-main);
+}
+
+.stat-cell {
+    font-family: monospace;
+    font-size: 15px;
+    color: var(--accent-good);
+    /* Use the green accent for stats */
+}
+
+.actions-cell {
+    text-align: right;
+    white-space: nowrap;
+    width: 1%;
+    /* Shrink to fit content */
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.table-actions .btn {
+    padding: 8px 12px;
+    min-width: unset;
+    /* Remove min-width from general buttons for compact table buttons if needed */
+}
+
+/* Empty State */
+.empty-state {
+    padding: 60px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 16px;
+}

@@ -529,7 +529,8 @@ async function fillFromLink() {
         // Parse Player Name
         const titleMatch = html.match(/<title>([^<|-]+)/);
         if (titleMatch) {
-            name = titleMatch[1].trim().split(" mùa ")[0].split(" - ")[0];
+            season = titleMatch[1].split("mùa")[1].trim().toUpperCase();
+            name = titleMatch[1].split("mùa")[0].trim() + " - " + season;
             elPlayerName.value = name;
         }
 

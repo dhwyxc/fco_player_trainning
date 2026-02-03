@@ -1,0 +1,134 @@
+/* Sidebar Styles */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    /* Hidden by default */
+    width: 280px;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-right: 1px solid var(--card-border);
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    /* Space for close button */
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#sidebar.open {
+    left: 0;
+}
+
+#sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#sidebar .nav-item {
+    width: 100%;
+}
+
+#sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+#sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+#sidebar .nav-link.active {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+#sidebar .nav-link svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2px;
+}
+
+/* Hamburger & Close Buttons */
+.hamburger-btn {
+    position: absolute;
+    top: 25px;
+    /* Aligned with header typically */
+    left: 20px;
+    z-index: 1001;
+    /* Above sidebar when closed, but managed via JS handling */
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Overlay for mobile */
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Adjust main content if needed for desktop persistent sidebar, 
+   but requirements say "collapsible for mobile AND desktop", 
+   so overlay or push is fine. We will stick to overlay/drawer style 
+   to preserve original layout exactly when closed. */

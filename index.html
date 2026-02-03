@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="sidebar.css">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icon.png">
   <meta name="theme-color" content="#3b82f6">
@@ -16,7 +17,7 @@
 
 <body>
   <header>
-    <h1>FCO Player Pos Calculator</h1>
+    <h1>FCO Calculator</h1>
   </header>
 
   <main>
@@ -215,6 +216,36 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="sidebar.js"></script>
+  <script>
+    // Logic to handle "Calc" requests from Saved page
+    document.addEventListener("DOMContentLoaded", () => {
+      const pendingName = localStorage.getItem("fco_pending_load");
+      if (pendingName) {
+        const key = "fco_player_stats:" + pendingName;
+        const dataStr = localStorage.getItem(key);
+        if (dataStr) {
+          try {
+            const obj = JSON.parse(dataStr);
+            // 'stats' and 'ATTRS' are global from app.js
+            for (const a of ATTRS) {
+              stats[a] = obj[a] || { cs: null, bonus: null };
+            }
+            if (document.getElementById("playerName")) {
+              document.getElementById("playerName").value = pendingName;
+            }
+            if (typeof updateAll === "function") {
+              updateAll();
+            }
+            console.log("Loaded pending player:", pendingName);
+          } catch (e) {
+            console.error("Failed to load pending player", e);
+          }
+        }
+        localStorage.removeItem("fco_pending_load");
+      }
+    });
+  </script>
 </body>
 
 </html>
