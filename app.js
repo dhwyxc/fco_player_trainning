@@ -69,14 +69,24 @@ function computePositionScore(pos) {
     const items = POSITION_CONFIG[pos] || [];
     let sumW = 0;
     let sum = 0;
+    let sumRaw = 0;
+    // const lvB = getLevelBonus();
+    // const grB = getGradeBonus();
+    // const tcB = getTeamBonus();
+
     for (const it of items) {
         const w = Number(it.weight) || 0;
+        const b = stats[it.attr]?.bonus ?? 0;
         const val = getStatTotal(it.attr);
+        const valRaw = val - b; // Total minus HLV bonus = (CS + LV + GR + TC)
+
         sumW += w;
         sum += w * val;
+        sumRaw += w * valRaw;
     }
     const score = (sumW === 0) ? 0 : (sum / sumW);
-    return { score, sumW, sum };
+    const rawScore = (sumW === 0) ? 0 : (sumRaw / sumW);
+    return { score, rawScore, sumW, sum };
 }
 
 function classifyScore(x) {
@@ -178,6 +188,15 @@ function renderAttrTable() {
     elFilledCount.textContent = String(filled);
 }
 
+function getPosClass(pos) {
+    const p = pos.toUpperCase();
+    if (["ST", "CF", "LW/RW", "LW", "RW"].includes(p)) return "pos-fw";
+    if (["CAM", "CM", "CDM", "LM/RM", "LM", "RM"].includes(p)) return "pos-mf";
+    if (["LB/RB", "LWB/RWB", "CB", "SW", "LB", "RB", "LWB", "RWB"].includes(p)) return "pos-df";
+    if (p === "GK") return "pos-gk";
+    return "";
+}
+
 function renderPositionTable(selectedPos = null) {
     elPosBody.innerHTML = "";
 
@@ -196,6 +215,12 @@ function renderPositionTable(selectedPos = null) {
         const tdPos = document.createElement("td");
         tdPos.style.fontWeight = "600";
         tdPos.textContent = pos;
+        tdPos.className = getPosClass(pos);
+
+        const tdRaw = document.createElement("td");
+        tdRaw.style.textAlign = "right";
+        tdRaw.className = "pos-raw-val";
+        tdRaw.textContent = r.rawScore.toFixed(2);
 
         const tdScore = document.createElement("td");
         tdScore.style.textAlign = "right";
@@ -207,6 +232,7 @@ function renderPositionTable(selectedPos = null) {
         tdScore.appendChild(badge);
 
         tr.appendChild(tdPos);
+        tr.appendChild(tdRaw);
         tr.appendChild(tdScore);
 
         tr.addEventListener("click", () => renderBreakdown(pos));
@@ -219,8 +245,8 @@ function renderBreakdown(pos) {
     const items = POSITION_CONFIG[pos] || [];
     const r = computePositionScore(pos);
 
-    elBreakTitle.textContent = "Chi tiết vị trí: " + pos;
-    elBreakInfo.textContent = "Tổng hệ số = " + r.sumW + " | Chỉ số = " + r.score.toFixed(2);
+    elBreakTitle.innerHTML = `Vị trí: <span class="${getPosClass(pos)}">${pos}</span>`;
+    elBreakInfo.innerHTML = `<span class="score-badge good">${r.score.toFixed(2)}</span>`;
 
     elBreakBody.innerHTML = "";
 
@@ -237,15 +263,19 @@ function renderBreakdown(pos) {
         return { attr: it.attr, w, usedCS, usedB, contrib, totalV: v };
     }).sort((a, b) => b.w - a.w);
 
-    for (const x of rows) {
+    rows.forEach((x, idx) => {
         const tr = document.createElement("tr");
+        const isTop = idx < 5;
+        if (isTop) tr.classList.add("top-attr");
 
         const tdA = document.createElement("td");
         tdA.textContent = x.attr;
+        if (isTop) tdA.classList.add("high-weight");
 
         const tdW = document.createElement("td");
         tdW.style.textAlign = "right";
         tdW.className = "mini-info";
+        if (isTop) tdW.classList.add("high-weight");
         tdW.textContent = String(x.w);
 
         const tdCS = document.createElement("td");
@@ -292,7 +322,7 @@ function renderBreakdown(pos) {
         tr.appendChild(tdTotalV);
         tr.appendChild(tdC);
         elBreakBody.appendChild(tr);
-    }
+    });
     renderPositionTable(pos);
 }
 
