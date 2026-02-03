@@ -368,6 +368,8 @@ document.getElementById("btnLoad").addEventListener("click", () => {
 
 document.getElementById("btnClear").addEventListener("click", () => {
     for (const a of ATTRS) stats[a] = { cs: null, bonus: null };
+    elPlayerName.value = "";
+    elPlayerLink.value = "";
     updateAll();
 });
 

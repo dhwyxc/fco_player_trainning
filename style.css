@@ -433,7 +433,7 @@ table {
 
     #posTable th,
     #posTable td {
-        padding: 12px 8px;
+        padding: 12px 16px;
         font-size: 14px;
     }
 
@@ -453,7 +453,7 @@ thead {
 
 th {
     text-align: left;
-    padding: 12px 16px;
+    padding: 14px 20px;
     font-size: 15px;
     font-weight: 700;
     color: var(--text-muted);
@@ -464,7 +464,7 @@ th {
 }
 
 td {
-    padding: 14px 16px;
+    padding: 16px 20px;
     font-size: 15px;
     border-bottom: 1px solid var(--card-border);
 }
@@ -608,13 +608,13 @@ tbody tr:hover {
 #attrTable th,
 #attrTable td {
     font-size: 15px;
-    padding: 12px 10px;
+    padding: 14px 12px;
 }
 
 #attrTable th:first-child,
 #attrTable td:first-child {
     width: 80px;
-    padding-left: 16px;
+    padding-left: 20px;
 }
 
 #attrTable th:nth-child(2),
@@ -636,7 +636,7 @@ tbody tr:hover {
 #attrTable th:last-child,
 #attrTable td:last-child {
     width: 60px;
-    padding-right: 16px;
+    padding-right: 20px;
 }
 
 /* Breakdown Table Specifics */
@@ -647,13 +647,13 @@ tbody tr:hover {
 #breakTable th,
 #breakTable td {
     font-size: 15px;
-    padding: 12px 10px;
+    padding: 14px 12px;
 }
 
 #breakTable th:nth-child(1),
 #breakTable td:nth-child(1) {
     width: auto;
-    padding-left: 16px;
+    padding-left: 20px;
 }
 
 #breakTable th:nth-child(2),
@@ -685,7 +685,7 @@ tbody tr:hover {
 #breakTable th:last-child,
 #breakTable td:last-child {
     width: 90px;
-    padding-right: 16px;
+    padding-right: 20px;
 }
 
 .bonus-selector .btn.active {
